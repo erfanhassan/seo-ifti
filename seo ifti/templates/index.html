@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Growth OS | Facebook & Twitter/X Socials Suite & GitHub Developer Advocate</title>
+  
+  <!-- Tailwind CSS & FontAwesome -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Custom Design Tokens -->
+  <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body class="min-h-screen text-slate-100 flex flex-col selection:bg-cyan-500 selection:text-slate-950">
+
+  <!-- =========================================================================
+       TOP NAVIGATION BAR
+       ========================================================================= -->
+  <header class="sticky top-0 z-50 glass-panel border-b border-slate-800/80 px-6 py-3.5">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      
+      <!-- Brand & Status -->
+      <div class="flex items-center gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-500 via-blue-600 to-indigo-600 flex items-center justify-center shadow-lg shadow-cyan-500/20 pulse-animation">
+            <i class="fas fa-layer-group text-slate-950 text-base font-bold"></i>
+          </div>
+          <div>
+            <h1 class="brand-font font-extrabold text-base tracking-tight gradient-text-cyan flex items-center gap-2">
+              Socials OS <span class="text-[10px] uppercase font-bold px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">v2.0</span>
+            </h1>
+            <p class="text-[11px] text-slate-400 font-medium">Facebook & Twitter/X Management & GitHub Advocate</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Navigation Switcher (GitHub / Socials) -->
+      <nav class="flex items-center bg-slate-950/80 p-1 rounded-2xl border border-slate-800 shadow-inner">
+        <button data-view-target="github" class="flex items-center gap-2 px-5 py-2 rounded-xl text-xs font-bold transition-all border border-transparent text-slate-400 hover:text-slate-200">
+          <i class="fab fa-github text-sm"></i>
+          <span>GitHub</span>
+        </button>
+
+        <button data-view-target="socials" class="flex items-center gap-2 px-5 py-2 rounded-xl text-xs font-bold transition-all border border-cyan-500/30 bg-slate-800 text-cyan-400 shadow-lg shadow-cyan-500/10">
+          <i class="fas fa-share-nodes text-sm"></i>
+          <span>Socials</span>
+        </button>
+      </nav>
+
+      <!-- System Health Status -->
+      <div class="hidden md:flex items-center gap-3 text-xs">
+        <div class="flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/50 border border-emerald-500/30 text-emerald-300 font-medium">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+          <span>DeepSeek AI Active</span>
+        </div>
+        <div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-slate-400 mono-font text-[11px]">
+          <i class="fab fa-facebook text-blue-400"></i>
+          <i class="fab fa-x-twitter text-slate-200 ml-1"></i> Connected
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       MAIN CONTENT CONTAINER
+       ========================================================================= -->
+  <main class="flex-1 max-w-7xl w-full mx-auto p-6 space-y-6">
+
+    <!-- =======================================================================
+         VIEW 1: SOCIALS OS (Facebook & Twitter/X Management)
+         ======================================================================= -->
+    <div id="view-socials" class="app-view-container grid grid-cols-1 lg:grid-cols-12 gap-6">
+      
+      <!-- Left Sidebar Navigation -->
+      <aside class="lg:col-span-3 space-y-4">
+        <div class="glass-panel rounded-2xl p-3 border border-slate-800 space-y-1">
+          
+          <!-- Facebook Tab -->
+          <button data-socials-tab="facebook" class="w-full flex items-center gap-3 px-3.5 py-3 rounded-xl text-xs font-bold transition text-left bg-cyan-500/10 text-cyan-400 border border-cyan-500/40">
+            <div class="w-7 h-7 rounded-lg bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-blue-400">
+              <i class="fab fa-facebook-f text-sm"></i>
+            </div>
+            <div>
+              <div class="leading-tight">Facebook Hub</div>
+              <div class="text-[10px] text-slate-500 font-normal">Page ID: 1180123065184719</div>
+            </div>
+          </button>
+
+          <!-- Twitter / X Tab -->
+          <button data-socials-tab="twitter" class="w-full flex items-center gap-3 px-3.5 py-3 rounded-xl text-xs font-bold transition text-left text-slate-400 hover:text-slate-200 border border-transparent">
+            <div class="w-7 h-7 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-200">
+              <i class="fab fa-x-twitter text-sm"></i>
+            </div>
+            <div>
+              <div class="leading-tight">Twitter / X Hub</div>
+              <div class="text-[10px] text-slate-500 font-normal">1-Click Copy Tweets & Threads</div>
+            </div>
+          </button>
+
+          <!-- LinkedIn Tab -->
+          <button data-socials-tab="linkedin" class="w-full flex items-center gap-3 px-3.5 py-3 rounded-xl text-xs font-bold transition text-left text-slate-400 hover:text-slate-200 border border-transparent">
+            <div class="w-7 h-7 rounded-lg bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-blue-400">
+              <i class="fab fa-linkedin-in text-sm"></i>
+            </div>
+            <div>
+              <div class="leading-tight">LinkedIn Hub</div>
+              <div class="text-[10px] text-slate-500 font-normal">Dwell Time & "See More" Posts</div>
+            </div>
+          </button>
+
+          <!-- Daily Autonomous Engine Tab -->
+          <button data-socials-tab="automation" class="w-full flex items-center gap-3 px-3.5 py-3 rounded-xl text-xs font-bold transition text-left text-slate-400 hover:text-slate-200 border border-transparent">
+            <div class="w-7 h-7 rounded-lg bg-purple-600/20 border border-purple-500/30 flex items-center justify-center text-purple-400">
+              <i class="fas fa-robot text-sm"></i>
+            </div>
+            <div>
+              <div class="leading-tight">Daily Auto-Poster</div>
+              <div class="text-[10px] text-slate-500 font-normal">Automated 24h Topic Engine</div>
+            </div>
+          </button>
+
+        </div>
+
+        <!-- Quick Status Card -->
+        <div class="glass-panel rounded-2xl p-4 border border-slate-800 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-slate-300 flex items-center gap-1.5">
+              <i class="fas fa-bolt text-cyan-400"></i> Live Publishing Status
+            </span>
+            <span id="globalAccountStatusBadge" class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Ready</span>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Meta Page API token & Twitter/X v2 credentials configured in <code class="text-cyan-300 text-[11px]">.env</code>. Write posts on any topic and publish live instantly with 1-click.
+          </p>
+          <button onclick="window.SocialsModule.triggerDailyQuick()" class="w-full py-2 rounded-xl gradient-btn-cyan text-xs font-bold transition flex items-center justify-center gap-2">
+            <i class="fas fa-wand-magic-sparkles"></i> Generate Today's Posts
+          </button>
+        </div>
+      </aside>
+
+      <!-- Main Socials Work Area -->
+      <section class="lg:col-span-9 space-y-6">
+
+        <!-- ===================================================================
+             TAB 1: FACEBOOK HUB
+             =================================================================== -->
+        <div id="socials-panel-facebook" class="socials-tab-panel space-y-6">
+          
+          <!-- 1. Top Header & "Generate Today's Post" Button -->
+          <div class="glass-panel p-5 rounded-2xl border border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4 bg-gradient-to-r from-blue-950/40 via-slate-900/60 to-slate-950/80">
+            <div class="flex items-center gap-3.5">
+              <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-700 flex items-center justify-center text-white text-xl shadow-lg shadow-blue-600/30 shrink-0">
+                <i class="fab fa-facebook-f"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h3 id="fbPageName" class="text-base font-bold text-slate-100">Facebook Business Page</h3>
+                  <span id="fbLiveStatusBadge" class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                    <i class="fas fa-check-circle mr-1"></i>Token Active
+                  </span>
+                </div>
+                <p class="text-xs text-slate-400 mt-0.5">
+                  Page ID: <span id="fbPageId" class="mono-font text-cyan-300 font-semibold">1180123065184719</span> &bull; 
+                  <span id="fbFollowersText" class="text-slate-400">Meta Graph API v19.0</span>
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2.5 shrink-0">
+              <button id="fbGenerateTodayBtn" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white text-xs font-bold shadow-lg shadow-blue-600/30 transition flex items-center gap-2">
+                <i class="fas fa-wand-magic-sparkles"></i> Generate Today's Post
+              </button>
+            </div>
+          </div>
+
+          <!-- 2. AI Facebook Post Creator -->
+          <div class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4">
+            <div>
+              <h2 class="text-base font-bold brand-font text-slate-100 flex items-center gap-2">
+                <i class="fas fa-wand-magic-sparkles text-blue-400"></i> AI Facebook Post Creator
+              </h2>
+              <p class="text-xs text-slate-400">Fill in the topic below to craft a high-engagement, algorithm-optimized Facebook post.</p>
+            </div>
+
+            <!-- Search / Fill-in-the-blank Bar -->
+            <div class="flex flex-col sm:flex-row items-stretch gap-2">
+              <div class="relative flex-1">
+                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
+                  <i class="fas fa-pen-nib text-xs"></i>
+                </div>
+                <input type="text" id="fbTopicInput" placeholder="Type a topic name here (e.g. Scaling AI Workflows, Local AI Startups...)" class="glass-input w-full pl-10 pr-4 py-2.5 rounded-xl text-xs">
+              </div>
+              <button id="fbGenerateBtn" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs font-bold shrink-0 flex items-center justify-center gap-2 shadow-lg shadow-blue-600/20 transition">
+                <i class="fas fa-sparkles"></i> Generate Facebook Post
+              </button>
+            </div>
+
+            <!-- Topic Filter Pills (Available just below the AI Post Creator) -->
+            <div class="space-y-2 pt-1 border-t border-slate-800/80">
+              <div class="flex items-center justify-between text-[11px] text-slate-400">
+                <span class="font-semibold text-slate-300"><i class="fas fa-filter text-cyan-400 mr-1"></i> Quick Topic Filters:</span>
+              </div>
+              
+              <div class="flex flex-wrap items-center gap-1.5">
+                <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-blue-950/60 text-blue-300 border border-blue-800/50">Startups</span>
+                <button data-quick-topic-fb="The Bootstrapped AI Stack: How to scale an AI medical app for doctors to 1,000 active users using lightweight frameworks like Replit and Antigravity instead of heavy AWS infrastructure." class="px-2.5 py-1 rounded-lg text-[11px] bg-slate-900 text-slate-300 hover:text-cyan-300 border border-slate-800 transition">Bootstrapped AI Stack</button>
+                <button data-quick-topic-fb="The 'Agentic AI' Shift: Why 2026 is moving past basic chatbots into autonomous, multi-agent systems that execute complex workflows without human supervision." class="px-2.5 py-1 rounded-lg text-[11px] bg-slate-900 text-slate-300 hover:text-cyan-300 border border-slate-800 transition">Agentic AI Shift</button>
+                <button data-quick-topic-fb="Zero-Cash Acquisitions: Handing over operational monetized businesses by partnering with existing supply chains for instant profitability without cash investment." class="px-2.5 py-1 rounded-lg text-[11px] bg-slate-900 text-slate-300 hover:text-cyan-300 border border-slate-800 transition">Zero-Cash Acquisitions</button>
+                <button data-quick-topic-fb="The 'Invisible AI' Trend: How modern businesses embed AI so deeply into operations that customers never even know they are interacting with it." class="px-2.5 py-1 rounded-lg text-[11px] bg-slate-900 text-slate-300 hover:text-cyan-300 border border-slate-800 transition">Invisible AI</button>
+              </div>
+
+              <div class="flex flex-wrap items-center gap-1.5 pt-0.5">
+                <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/50">BD Tech</span>
+                <button data-quick-topic-fb="The Meta SME AI Academy: The 2026 initiative in Bangladesh training SMEs in AI tools, and how local agriculture and garment sectors will scale globally." class="px-2.5 py-1 rounded-lg text-[11px] bg-slate-900 text-slate-300 hover:text-cyan-300 border border-slate-800 transition">Meta SME AI Academy (BD)</button>
+                <button data-quick-topic-fb="The Rise of Local AI Engineering: Why local firms (DSi, SELISE, Devnet) are shifting from software outsourcing to building complex ML & GenAI models for global clients." class="px-2.5 py-1 rounded-lg text-[11px] bg-slate-900 text-slate-300 hover:text-cyan-300 border border-slate-800 transition">Local AI Engineering</button>
+                <button data-quick-topic-fb="The 2026 AI Business Summit: DCCI pushing practical, on-the-floor AI applications for local SMEs to address job displacement and digital sovereignty." class="px-2.5 py-1 rounded-lg text-[11px] bg-slate-900 text-slate-300 hover:text-cyan-300 border border-slate-800 transition">DCCI AI Summit</button>
+              </div>
+
+              <div class="flex flex-wrap items-center gap-1.5 pt-0.5">
+                <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/50">Synthetic</span>
+                <button data-quick-topic-fb="The Dual-Persona Architecture: The psychology and prompt engineering behind creating an AI that switches instantly between brutal unfiltered truths and soft empathy." class="px-2.5 py-1 rounded-lg text-[11px] bg-slate-900 text-slate-300 hover:text-cyan-300 border border-slate-800 transition">Dual-Persona Architecture</button>
+                <button data-quick-topic-fb="The Synthetic Influencer Economy: How AI-generated creators are securing real-world brand deals on TikTok and Facebook and their monetization models." class="px-2.5 py-1 rounded-lg text-[11px] bg-slate-900 text-slate-300 hover:text-cyan-300 border border-slate-800 transition">Synthetic Influencer Economy</button>
+                <button data-quick-topic-fb="Human & AI Collaboration: Why the Half-Human + Half-AI model is outperforming pure AI systems in 2026 through autonomous execution with human-in-the-loop review." class="px-2.5 py-1 rounded-lg text-[11px] bg-slate-900 text-slate-300 hover:text-cyan-300 border border-slate-800 transition">Half-Human + Half-AI</button>
+              </div>
+
+              <div class="flex flex-wrap items-center gap-1.5 pt-0.5">
+                <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-cyan-950/60 text-cyan-300 border border-cyan-800/50">Tech Pulse</span>
+                <button data-quick-topic-fb="Unit Economics of Healthcare AI: How vertical AI tools maintain high margins by diagnosing reports and handling clinical workflows autonomously." class="px-2.5 py-1 rounded-lg text-[11px] bg-slate-900 text-slate-300 hover:text-cyan-300 border border-slate-800 transition">Healthcare AI Economics</button>
+                <button data-quick-topic-fb="AI in Software Development Cycles: How developer roles in 2026 shifted from writing syntax to orchestrating autonomous agents that design, test, and deploy code." class="px-2.5 py-1 rounded-lg text-[11px] bg-slate-900 text-slate-300 hover:text-cyan-300 border border-slate-800 transition">Developer Agent Role</button>
+              </div>
+            </div>
+
+            <!-- Live Editable Generated Facebook Post Card -->
+            <div id="fbGeneratedCard" class="bg-slate-950/90 rounded-2xl p-5 border border-blue-500/30 space-y-3 shadow-xl shadow-blue-500/5">
+              <div class="flex items-center justify-between border-b border-slate-800/80 pb-2.5">
+                <div class="flex items-center gap-2">
+                  <div class="w-6 h-6 rounded-full bg-blue-600 flex items-center justify-center text-white text-xs font-bold">
+                    <i class="fab fa-facebook-f text-[10px]"></i>
+                  </div>
+                  <span class="text-xs font-bold text-slate-200">Generated Post Draft</span>
+                  <span class="text-[10px] text-slate-400 font-normal">(Editable)</span>
+                </div>
+                <span id="fbWordCountBadge" class="text-[11px] mono-font text-slate-400">0 words</span>
+              </div>
+
+              <!-- Post Message Textarea (Editable!) -->
+              <textarea id="fbContentEditor" class="glass-input w-full h-48 p-4 rounded-xl text-xs font-normal leading-relaxed resize-y" placeholder="Type a topic above and click 'Generate Facebook Post', or click 'Generate Today's Post'. Your editable post will appear here..."></textarea>
+
+              <!-- Strictly Two Options: Publish Post & Copy Post -->
+              <div class="flex items-center justify-end gap-2 pt-1">
+                <button id="fbCopyGeneratedBtn" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-slate-700 text-xs font-semibold flex items-center gap-1.5 transition">
+                  <i class="fas fa-copy"></i> Copy Post
+                </button>
+                <button id="fbPublishGeneratedBtn" class="px-4 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs font-bold flex items-center gap-1.5 shadow-lg shadow-blue-600/30 transition">
+                  <i class="fas fa-paper-plane"></i> Publish Post
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Facebook Post Feed -->
+          <div class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-800/80 pb-3">
+              <div>
+                <h3 class="text-sm font-bold brand-font text-slate-100 flex items-center gap-2">
+                  <i class="fas fa-rss text-cyan-400"></i> Facebook Post Feed
+                </h3>
+                <p class="text-xs text-slate-400 mt-0.5">An already generated post sitting ready to edit, copy, publish, or refresh.</p>
+              </div>
+            </div>
+
+            <!-- Feed Post Card (Editable!) -->
+            <div id="fbFeedPostContainer" class="bg-slate-950/90 rounded-2xl p-5 border border-cyan-500/20 space-y-3 shadow-xl">
+              <div class="flex items-center justify-between border-b border-slate-800/80 pb-2.5">
+                <div class="flex items-center gap-2">
+                  <span id="fbFeedStatusBadge" class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border bg-cyan-500/20 text-cyan-300 border-cyan-500/30">
+                    READY TO PUBLISH
+                  </span>
+                  <span id="fbFeedTopicLabel" class="text-xs font-semibold text-slate-300 truncate max-w-sm">The Bootstrapped AI Stack</span>
+                </div>
+                <span id="fbFeedWordCountBadge" class="text-[11px] mono-font text-slate-400">0 words</span>
+              </div>
+
+              <!-- Feed Textarea (Editable!) -->
+              <textarea id="fbFeedContentEditor" class="glass-input w-full h-48 p-4 rounded-xl text-xs font-normal leading-relaxed resize-y" placeholder="Loading feed post..."></textarea>
+
+              <!-- Strictly Three Options: Publish to Page, Copy Post, Refresh Feed -->
+              <div class="flex flex-wrap items-center justify-between gap-2 pt-1">
+                <button id="fbFeedRefreshBtn" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 text-xs font-semibold flex items-center gap-1.5 transition">
+                  <i class="fas fa-arrows-rotate"></i> Refresh Feed
+                </button>
+
+                <div class="flex items-center gap-2">
+                  <button id="fbFeedCopyBtn" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-slate-700 text-xs font-semibold flex items-center gap-1.5 transition">
+                    <i class="fas fa-copy"></i> Copy Post
+                  </button>
+                  <button id="fbFeedPublishBtn" class="px-4 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white text-xs font-bold flex items-center gap-1.5 shadow-lg shadow-blue-600/30 transition">
+                    <i class="fas fa-paper-plane"></i> Publish to Page
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ===================================================================
+             TAB 2: TWITTER / X HUB
+             =================================================================== -->
+        <div id="socials-panel-twitter" class="socials-tab-panel hidden space-y-6">
+          
+          <!-- 1. Top Header & "Generate Today's Tweet" Button -->
+          <div class="glass-panel p-5 rounded-2xl border border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4 bg-gradient-to-r from-slate-900/80 via-slate-900/60 to-slate-950/80">
+            <div class="flex items-center gap-3.5">
+              <div class="w-12 h-12 rounded-2xl bg-slate-900 border border-slate-700 flex items-center justify-center text-white text-xl shadow-lg shrink-0">
+                <i class="fab fa-x-twitter"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h3 id="twAccountName" class="text-base font-bold text-slate-100">Twitter / X Hub</h3>
+                  <span id="twLiveStatusBadge" class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                    <i class="fas fa-check-circle mr-1"></i>API v2 Ready
+                  </span>
+                </div>
+                <p class="text-xs text-slate-400 mt-0.5">
+                  Client ID: <span id="twClientId" class="mono-font text-cyan-300 font-semibold">VEctN2p...</span> &bull; 
+                  <span>Strict 280-Character Engine</span>
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2.5 shrink-0">
+              <button id="twGenerateTodayBtn" class="px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-white text-slate-950 text-xs font-bold shadow-lg shadow-white/10 transition flex items-center gap-2">
+                <i class="fas fa-wand-magic-sparkles"></i> Generate Today's Tweet
+              </button>
+            </div>
+          </div>
+
+          <!-- 2. AI Tweet Creator -->
+          <div class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4">
+            <div>
+              <h2 class="text-base font-bold brand-font text-slate-100 flex items-center gap-2">
+                <i class="fas fa-bolt text-cyan-400"></i> AI Tweet & Thread Creator
+              </h2>
+              <p class="text-xs text-slate-400">Fill in the topic below to craft punchy, high-signal tweets strictly under 280 characters.</p>
+            </div>
+
+            <!-- Search / Fill-in-the-blank Bar -->
+            <div class="flex flex-col sm:flex-row items-stretch gap-2">
+              <div class="relative flex-1">
+                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
+                  <i class="fas fa-pen-nib text-xs"></i>
+                </div>
+                <input type="text" id="twTopicInput" placeholder="Type a topic name here (e.g. Why Simplicity Scales in 2026)..." class="glass-input w-full pl-10 pr-4 py-2.5 rounded-xl text-xs">
+              </div>
+              <button id="twGenerateBtn" class="px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-white text-slate-950 text-xs font-bold shrink-0 flex items-center justify-center gap-2 shadow-lg shadow-white/10 transition">
+                <i class="fab fa-x-twitter"></i> Generate Tweet
+              </button>
+            </div>
+
+            <!-- Topic Filter Pills (Available just below the AI Tweet Creator) -->
+            <div class="space-y-2 pt-1 border-t border-slate-800/80">
+              <div class="flex items-center justify-between text-[11px] text-slate-400">
+                <span class="font-semibold text-slate-300"><i class="fas fa-filter text-cyan-400 mr-1"></i> Quick Topic Filters:</span>
+              </div>
+              
+              <div class="flex flex-wrap items-center gap-1.5">
+                <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-blue-950/60 text-blue-300 border border-blue-800/50">Startups</span>
+                <button data-quick-topic-tw="The Bootstrapped AI Stack: Scaling medical AI to 1,000 users with lightweight frameworks like Replit & Antigravity vs heavy AWS" class="px-2.5 py-1 rounded-lg text-[11px] bg-slate-900 text-slate-300 hover:text-cyan-300 border border-slate-800 transition">Bootstrapped AI Stack</button>
+                <button data-quick-topic-tw="The 'Agentic AI' Shift: Moving past chatbots to autonomous multi-agent execution in 2026 without human supervision" class="px-2.5 py-1 rounded-lg text-[11px] bg-slate-900 text-slate-300 hover:text-cyan-300 border border-slate-800 transition">Agentic AI Shift</button>
+                <button data-quick-topic-tw="Zero-Cash Acquisitions: Partnering with existing supply chain operators for instant profitability without cash investment" class="px-2.5 py-1 rounded-lg text-[11px] bg-slate-900 text-slate-300 hover:text-cyan-300 border border-slate-800 transition">Zero-Cash Acquisitions</button>
+                <button data-quick-topic-tw="The 'Invisible AI' Trend: Embedding AI so deeply into business operations that customers never realize they use it" class="px-2.5 py-1 rounded-lg text-[11px] bg-slate-900 text-slate-300 hover:text-cyan-300 border border-slate-800 transition">Invisible AI</button>
+              </div>
+
+              <div class="flex flex-wrap items-center gap-1.5 pt-0.5">
+                <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/50">BD Tech</span>
+                <button data-quick-topic-tw="The Meta SME AI Academy in Bangladesh: Scaling agriculture & garment sectors globally with practical AI tools" class="px-2.5 py-1 rounded-lg text-[11px] bg-slate-900 text-slate-300 hover:text-cyan-300 border border-slate-800 transition">Meta SME AI Academy (BD)</button>
+                <button data-quick-topic-tw="The Rise of Local AI Engineering: DSi, SELISE, and Devnet shifting from outsourcing to complex GenAI models" class="px-2.5 py-1 rounded-lg text-[11px] bg-slate-900 text-slate-300 hover:text-cyan-300 border border-slate-800 transition">Local AI Engineering</button>
+                <button data-quick-topic-tw="The 2026 AI Business Summit: DCCI pushing practical floor AI & digital sovereignty for local SMEs" class="px-2.5 py-1 rounded-lg text-[11px] bg-slate-900 text-slate-300 hover:text-cyan-300 border border-slate-800 transition">DCCI AI Summit</button>
+              </div>
+
+              <div class="flex flex-wrap items-center gap-1.5 pt-0.5">
+                <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/50">Synthetic</span>
+                <button data-quick-topic-tw="The Dual-Persona Architecture: Engineering AI that switches between brutal unfiltered truths and soft empathy" class="px-2.5 py-1 rounded-lg text-[11px] bg-slate-900 text-slate-300 hover:text-cyan-300 border border-slate-800 transition">Dual-Persona Architecture</button>
+                <button data-quick-topic-tw="The Synthetic Influencer Economy: AI creators landing real-world brand deals on TikTok & Facebook" class="px-2.5 py-1 rounded-lg text-[11px] bg-slate-900 text-slate-300 hover:text-cyan-300 border border-slate-800 transition">Synthetic Influencer Economy</button>
+                <button data-quick-topic-tw="Human & AI Collaboration: Why the Half-Human + Half-AI model outperforms pure AI in 2026" class="px-2.5 py-1 rounded-lg text-[11px] bg-slate-900 text-slate-300 hover:text-cyan-300 border border-slate-800 transition">Half-Human + Half-AI</button>
+              </div>
+
+              <div class="flex flex-wrap items-center gap-1.5 pt-0.5">
+                <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-cyan-950/60 text-cyan-300 border border-cyan-800/50">Tech Pulse</span>
+                <button data-quick-topic-tw="Unit Economics of Healthcare AI: Maintaining high margins with autonomous clinical diagnostics & workflows" class="px-2.5 py-1 rounded-lg text-[11px] bg-slate-900 text-slate-300 hover:text-cyan-300 border border-slate-800 transition">Healthcare AI Economics</button>
+                <button data-quick-topic-tw="AI in Software Development Cycles: Shifting from syntax writing to managing autonomous agents that design and test" class="px-2.5 py-1 rounded-lg text-[11px] bg-slate-900 text-slate-300 hover:text-cyan-300 border border-slate-800 transition">Developer Agent Role</button>
+              </div>
+            </div>
+
+            <!-- Live Editable Generated Tweet Card -->
+            <div id="twGeneratedCard" class="bg-slate-950/90 rounded-2xl p-5 border border-slate-700 space-y-3 shadow-xl">
+              <div class="flex items-center justify-between border-b border-slate-800/80 pb-2.5">
+                <div class="flex items-center gap-2">
+                  <div class="w-6 h-6 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-white text-xs font-bold">
+                    <i class="fab fa-x-twitter text-[10px]"></i>
+                  </div>
+                  <span class="text-xs font-bold text-slate-200">Generated Tweet Draft</span>
+                  <span class="text-[10px] text-slate-400 font-normal">(Editable)</span>
+                </div>
+                <span id="twCharBadge" class="font-bold mono-font px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-cyan-400 text-[11px]">0 / 280</span>
+              </div>
+
+              <!-- Tweet Message Textarea (Editable!) -->
+              <textarea id="twContentEditor" maxlength="280" class="glass-input w-full h-36 p-4 rounded-xl text-xs font-normal leading-relaxed resize-y font-mono" placeholder="Type a topic above and click 'Generate Tweet', or click 'Generate Today's Tweet'. Your editable tweet will appear here..."></textarea>
+
+              <!-- Optional 3-Part Thread Preview -->
+              <div id="twThreadContainer" class="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800 space-y-2 hidden">
+                <span class="text-xs font-bold text-slate-300 flex items-center gap-1.5">
+                  <i class="fas fa-list-ol text-cyan-400"></i> AI Multi-Part Thread Expansion
+                </span>
+                <div id="twThreadList" class="space-y-1.5 text-xs text-slate-300 font-mono"></div>
+              </div>
+
+              <!-- Strictly Two Options: Publish Tweet & Copy Tweet -->
+              <div class="flex items-center justify-end gap-2 pt-1">
+                <button id="twCopyGeneratedBtn" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-slate-700 text-xs font-semibold flex items-center gap-1.5 transition">
+                  <i class="fas fa-copy"></i> Copy Tweet
+                </button>
+                <button id="twPublishGeneratedBtn" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-white text-slate-950 text-xs font-bold flex items-center gap-1.5 shadow-lg shadow-white/10 transition">
+                  <i class="fab fa-x-twitter"></i> Publish Tweet
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Twitter / X Post Feed -->
+          <div class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-800/80 pb-3">
+              <div>
+                <h3 class="text-sm font-bold brand-font text-slate-100 flex items-center gap-2">
+                  <i class="fas fa-rss text-cyan-400"></i> Twitter / X Post Feed
+                </h3>
+                <p class="text-xs text-slate-400 mt-0.5">An already generated tweet sitting ready to edit, copy, publish, or refresh.</p>
+              </div>
+            </div>
+
+            <!-- Feed Tweet Card (Editable!) -->
+            <div id="twFeedPostContainer" class="bg-slate-950/90 rounded-2xl p-5 border border-cyan-500/20 space-y-3 shadow-xl">
+              <div class="flex items-center justify-between border-b border-slate-800/80 pb-2.5">
+                <div class="flex items-center gap-2">
+                  <span id="twFeedStatusBadge" class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border bg-cyan-500/20 text-cyan-300 border-cyan-500/30">
+                    READY TO POST
+                  </span>
+                  <span id="twFeedTopicLabel" class="text-xs font-semibold text-slate-300 truncate max-w-sm">The Bootstrapped AI Stack</span>
+                </div>
+                <span id="twFeedCharBadge" class="font-bold mono-font px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-cyan-400 text-[11px]">0 / 280</span>
+              </div>
+
+              <!-- Feed Textarea (Editable!) -->
+              <textarea id="twFeedContentEditor" maxlength="280" class="glass-input w-full h-36 p-4 rounded-xl text-xs font-normal leading-relaxed resize-y font-mono" placeholder="Loading feed tweet..."></textarea>
+
+              <!-- Strictly Three Options: Publish to Twitter, Copy Tweet, Refresh Feed -->
+              <div class="flex flex-wrap items-center justify-between gap-2 pt-1">
+                <button id="twFeedRefreshBtn" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 text-xs font-semibold flex items-center gap-1.5 transition">
+                  <i class="fas fa-arrows-rotate"></i> Refresh Feed
+                </button>
+
+                <div class="flex items-center gap-2">
+                  <button id="twFeedCopyBtn" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-slate-700 text-xs font-semibold flex items-center gap-1.5 transition">
+                    <i class="fas fa-copy"></i> Copy Tweet
+                  </button>
+                  <button id="twFeedPublishBtn" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-white text-slate-950 text-xs font-bold flex items-center gap-1.5 shadow-lg shadow-white/10 transition">
+                    <i class="fab fa-x-twitter"></i> Publish to Twitter
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ===================================================================
+             TAB 3: LINKEDIN HUB
+             =================================================================== -->
+        <div id="socials-panel-linkedin" class="socials-tab-panel hidden space-y-6">
+          
+          <!-- 1. Top Header & "Generate Today's Post" Button -->
+          <div class="glass-panel p-5 rounded-2xl border border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4 bg-gradient-to-r from-blue-950/40 via-indigo-950/60 to-slate-950/80">
+            <div class="flex items-center gap-3.5">
+              <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-blue-700 to-indigo-800 flex items-center justify-center text-white text-xl shadow-lg shadow-blue-700/20 shrink-0">
+                <i class="fab fa-linkedin-in"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h3 class="text-base font-bold text-slate-100">LinkedIn Hub</h3>
+                  <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30">
+                    <i class="fas fa-eye mr-1"></i>Dwell Time & "See More" Ready
+                  </span>
+                </div>
+                <p class="text-xs text-slate-400 mt-0.5">
+                  Mobile-First Spacing &bull; Curiosity Hooks &bull; High-Conversion Architecture
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2.5 shrink-0">
+              <button id="liGenerateTodayBtn" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-700 via-indigo-600 to-cyan-500 hover:from-blue-600 hover:to-cyan-400 text-white text-xs font-bold shadow-lg shadow-blue-700/30 transition flex items-center gap-2">
+                <i class="fas fa-wand-magic-sparkles"></i> Generate Today's Post
+              </button>
+            </div>
+          </div>
+
+          <!-- 2. AI LinkedIn Post Creator -->
+          <div class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4">
+            <div>
+              <h2 class="text-base font-bold brand-font text-slate-100 flex items-center gap-2">
+                <i class="fas fa-briefcase text-blue-400"></i> AI LinkedIn Post Creator
+              </h2>
+              <p class="text-xs text-slate-400">Fill in the topic below to craft high-performing thought leadership with curiosity hooks and debate kickers.</p>
+            </div>
+
+            <!-- Search / Fill-in-the-blank Bar -->
+            <div class="flex flex-col sm:flex-row items-stretch gap-2">
+              <div class="relative flex-1">
+                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
+                  <i class="fas fa-pen-nib text-xs"></i>
+                </div>
+                <input type="text" id="liTopicInput" placeholder="Type a topic name here (e.g. Scaling AI Startups, Dual-Persona LLMs...)" class="glass-input w-full pl-10 pr-4 py-2.5 rounded-xl text-xs">
+              </div>
+              <button id="liGenerateBtn" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-700 to-indigo-600 hover:from-blue-600 hover:to-indigo-500 text-white text-xs font-bold shrink-0 flex items-center justify-center gap-2 shadow-lg shadow-blue-700/20 transition">
+                <i class="fab fa-linkedin-in"></i> Generate LinkedIn Post
+              </button>
+            </div>
+
+            <!-- Topic Filter Pills (Available just below the AI Post Creator) -->
+            <div class="space-y-2 pt-1 border-t border-slate-800/80">
+              <div class="flex items-center justify-between text-[11px] text-slate-400">
+                <span class="font-semibold text-slate-300"><i class="fas fa-filter text-cyan-400 mr-1"></i> Quick Topic Filters:</span>
+              </div>
+              
+              <div class="flex flex-wrap items-center gap-1.5">
+                <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-blue-950/60 text-blue-300 border border-blue-800/50">Startups</span>
+                <button data-quick-topic-li="The Bootstrapped AI Stack: How to scale an AI medical app for doctors to 1,000 active users using lightweight frameworks like Replit and Antigravity instead of heavy AWS infrastructure." class="px-2.5 py-1 rounded-lg text-[11px] bg-slate-900 text-slate-300 hover:text-cyan-300 border border-slate-800 transition">Bootstrapped AI Stack</button>
+                <button data-quick-topic-li="The 'Agentic AI' Shift: Why 2026 is moving past basic chatbots into autonomous, multi-agent systems that execute complex workflows without human supervision." class="px-2.5 py-1 rounded-lg text-[11px] bg-slate-900 text-slate-300 hover:text-cyan-300 border border-slate-800 transition">Agentic AI Shift</button>
+                <button data-quick-topic-li="Zero-Cash Acquisitions: Handing over operational monetized businesses by partnering with existing supply chains for instant profitability without cash investment." class="px-2.5 py-1 rounded-lg text-[11px] bg-slate-900 text-slate-300 hover:text-cyan-300 border border-slate-800 transition">Zero-Cash Acquisitions</button>
+                <button data-quick-topic-li="The 'Invisible AI' Trend: How modern businesses embed AI so deeply into operations that customers never even know they are interacting with it." class="px-2.5 py-1 rounded-lg text-[11px] bg-slate-900 text-slate-300 hover:text-cyan-300 border border-slate-800 transition">Invisible AI</button>
+              </div>
+
+              <div class="flex flex-wrap items-center gap-1.5 pt-0.5">
+                <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/50">BD Tech</span>
+                <button data-quick-topic-li="The Meta SME AI Academy: The 2026 initiative in Bangladesh training SMEs in AI tools, and how local agriculture and garment sectors will scale globally." class="px-2.5 py-1 rounded-lg text-[11px] bg-slate-900 text-slate-300 hover:text-cyan-300 border border-slate-800 transition">Meta SME AI Academy (BD)</button>
+                <button data-quick-topic-li="The Rise of Local AI Engineering: Why local firms (DSi, SELISE, Devnet) are shifting from software outsourcing to building complex ML & GenAI models for global clients." class="px-2.5 py-1 rounded-lg text-[11px] bg-slate-900 text-slate-300 hover:text-cyan-300 border border-slate-800 transition">Local AI Engineering</button>
+                <button data-quick-topic-li="The 2026 AI Business Summit: DCCI pushing practical, on-the-floor AI applications for local SMEs to address job displacement and digital sovereignty." class="px-2.5 py-1 rounded-lg text-[11px] bg-slate-900 text-slate-300 hover:text-cyan-300 border border-slate-800 transition">DCCI AI Summit</button>
+              </div>
+
+              <div class="flex flex-wrap items-center gap-1.5 pt-0.5">
+                <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/50">Synthetic</span>
+                <button data-quick-topic-li="The Dual-Persona Architecture: The psychology and prompt engineering behind creating an AI that switches instantly between brutal unfiltered truths and soft empathy." class="px-2.5 py-1 rounded-lg text-[11px] bg-slate-900 text-slate-300 hover:text-cyan-300 border border-slate-800 transition">Dual-Persona Architecture</button>
+                <button data-quick-topic-li="The Synthetic Influencer Economy: How AI-generated creators are securing real-world brand deals on TikTok and Facebook and their monetization models." class="px-2.5 py-1 rounded-lg text-[11px] bg-slate-900 text-slate-300 hover:text-cyan-300 border border-slate-800 transition">Synthetic Influencer Economy</button>
+                <button data-quick-topic-li="Human & AI Collaboration: Why the Half-Human + Half-AI model is outperforming pure AI systems in 2026 through autonomous execution with human-in-the-loop review." class="px-2.5 py-1 rounded-lg text-[11px] bg-slate-900 text-slate-300 hover:text-cyan-300 border border-slate-800 transition">Half-Human + Half-AI</button>
+              </div>
+
+              <div class="flex flex-wrap items-center gap-1.5 pt-0.5">
+                <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-cyan-950/60 text-cyan-300 border border-cyan-800/50">Tech Pulse</span>
+                <button data-quick-topic-li="Unit Economics of Healthcare AI: How vertical AI tools maintain high margins by diagnosing reports and handling clinical workflows autonomously." class="px-2.5 py-1 rounded-lg text-[11px] bg-slate-900 text-slate-300 hover:text-cyan-300 border border-slate-800 transition">Healthcare AI Economics</button>
+                <button data-quick-topic-li="AI in Software Development Cycles: How developer roles in 2026 shifted from writing syntax to orchestrating autonomous agents that design, test, and deploy code." class="px-2.5 py-1 rounded-lg text-[11px] bg-slate-900 text-slate-300 hover:text-cyan-300 border border-slate-800 transition">Developer Agent Role</button>
+              </div>
+            </div>
+
+            <!-- Live Editable Generated LinkedIn Post Card -->
+            <div id="liGeneratedCard" class="bg-slate-950/90 rounded-2xl p-5 border border-blue-500/30 space-y-3 shadow-xl shadow-blue-500/5">
+              <div class="flex items-center justify-between border-b border-slate-800/80 pb-2.5">
+                <div class="flex items-center gap-2">
+                  <div class="w-6 h-6 rounded-full bg-blue-700 flex items-center justify-center text-white text-xs font-bold">
+                    <i class="fab fa-linkedin-in text-[10px]"></i>
+                  </div>
+                  <span class="text-xs font-bold text-slate-200">Generated Post Draft</span>
+                  <span class="text-[10px] text-slate-400 font-normal">(Editable)</span>
+                </div>
+                <span id="liWordCountBadge" class="text-[11px] mono-font text-slate-400">0 words</span>
+              </div>
+
+              <!-- Post Message Textarea (Editable!) -->
+              <textarea id="liContentEditor" class="glass-input w-full h-48 p-4 rounded-xl text-xs font-normal leading-relaxed resize-y font-sans" placeholder="Type a topic above and click 'Generate LinkedIn Post', or click 'Generate Today's Post'. Your editable post will appear here..."></textarea>
+
+              <!-- Strictly Two Options: Publish Post & Copy Post -->
+              <div class="flex items-center justify-end gap-2 pt-1">
+                <button id="liCopyGeneratedBtn" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-slate-700 text-xs font-semibold flex items-center gap-1.5 transition">
+                  <i class="fas fa-copy"></i> Copy Post
+                </button>
+                <button id="liPublishGeneratedBtn" class="px-4 py-2 rounded-xl bg-gradient-to-r from-blue-700 to-indigo-600 hover:from-blue-600 hover:to-indigo-500 text-white text-xs font-bold flex items-center gap-1.5 shadow-lg shadow-blue-700/30 transition">
+                  <i class="fab fa-linkedin-in"></i> Publish Post
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. LinkedIn Post Feed -->
+          <div class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-800/80 pb-3">
+              <div>
+                <h3 class="text-sm font-bold brand-font text-slate-100 flex items-center gap-2">
+                  <i class="fas fa-rss text-cyan-400"></i> LinkedIn Post Feed
+                </h3>
+                <p class="text-xs text-slate-400 mt-0.5">An already generated post sitting ready to edit, copy, publish, or refresh.</p>
+              </div>
+            </div>
+
+            <!-- Feed Post Card (Editable!) -->
+            <div id="liFeedPostContainer" class="bg-slate-950/90 rounded-2xl p-5 border border-cyan-500/20 space-y-3 shadow-xl">
+              <div class="flex items-center justify-between border-b border-slate-800/80 pb-2.5">
+                <div class="flex items-center gap-2">
+                  <span id="liFeedStatusBadge" class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border bg-cyan-500/20 text-cyan-300 border-cyan-500/30">
+                    READY TO PUBLISH
+                  </span>
+                  <span id="liFeedTopicLabel" class="text-xs font-semibold text-slate-300 truncate max-w-sm">The Bootstrapped AI Stack</span>
+                </div>
+                <span id="liFeedWordCountBadge" class="text-[11px] mono-font text-slate-400">0 words</span>
+              </div>
+
+              <!-- Feed Textarea (Editable!) -->
+              <textarea id="liFeedContentEditor" class="glass-input w-full h-48 p-4 rounded-xl text-xs font-normal leading-relaxed resize-y font-sans" placeholder="Loading feed post..."></textarea>
+
+              <!-- Strictly Three Options: Publish to LinkedIn, Copy Post, Refresh Feed -->
+              <div class="flex flex-wrap items-center justify-between gap-2 pt-1">
+                <button id="liFeedRefreshBtn" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 text-xs font-semibold flex items-center gap-1.5 transition">
+                  <i class="fas fa-arrows-rotate"></i> Refresh Feed
+                </button>
+
+                <div class="flex items-center gap-2">
+                  <button id="liFeedCopyBtn" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-slate-700 text-xs font-semibold flex items-center gap-1.5 transition">
+                    <i class="fas fa-copy"></i> Copy Post
+                  </button>
+                  <button id="liFeedPublishBtn" class="px-4 py-2 rounded-xl bg-gradient-to-r from-blue-700 to-indigo-600 hover:from-blue-600 hover:to-indigo-500 text-white text-xs font-bold flex items-center gap-1.5 shadow-lg shadow-blue-700/30 transition">
+                    <i class="fab fa-linkedin-in"></i> Publish to LinkedIn
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ===================================================================
+             TAB 3: DAILY AUTONOMOUS ENGINE
+             =================================================================== -->
+        <div id="socials-panel-automation" class="socials-tab-panel hidden space-y-6">
+          
+          <!-- Master Control Header -->
+          <div class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h2 class="text-base font-bold brand-font text-slate-100 flex items-center gap-2">
+                  <i class="fas fa-calendar-check text-purple-400"></i> Daily Autonomous Content Scheduler
+                </h2>
+                <p class="text-xs text-slate-400">Generates and queues daily strategic content for both Facebook and Twitter based on your weekly growth topics.</p>
+              </div>
+
+              <div class="flex items-center gap-2 shrink-0">
+                <button id="triggerTodayBtn" class="gradient-btn-cyan px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5">
+                  <i class="fas fa-bolt"></i> Run Today's Auto-Poster
+                </button>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 text-xs">
+              <div class="p-3 rounded-xl bg-slate-950/60 border border-slate-800">
+                <span class="text-slate-400">Posting Frequency</span>
+                <div class="font-bold text-slate-200 mt-1 flex items-center gap-1.5">
+                  <i class="fas fa-clock text-cyan-400"></i> Every 24 Hours
+                </div>
+              </div>
+              <div class="p-3 rounded-xl bg-slate-950/60 border border-slate-800">
+                <span class="text-slate-400">Connected Networks</span>
+                <div class="font-bold text-slate-200 mt-1 flex items-center gap-1.5">
+                  <i class="fab fa-facebook text-blue-400"></i> Facebook + <i class="fab fa-x-twitter text-slate-200"></i> Twitter/X
+                </div>
+              </div>
+              <div class="p-3 rounded-xl bg-slate-950/60 border border-slate-800">
+                <span class="text-slate-400">AI Copywriter Engine</span>
+                <div class="font-bold text-slate-200 mt-1 flex items-center gap-1.5">
+                  <i class="fas fa-sparkles text-purple-400"></i> DeepSeek Chat Model
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 7-Day Weekly Topic Matrix -->
+          <div class="glass-panel p-5 rounded-2xl border border-slate-800 space-y-4">
+            <div>
+              <h3 class="text-sm font-bold text-slate-200">Weekly Topic Strategy (7-Day Blueprint)</h3>
+              <p class="text-xs text-slate-400">The autonomous engine uses these daily themes to create contextual posts every morning</p>
+            </div>
+
+            <div id="weeklyTopicsContainer" class="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <!-- Dynamically rendered -->
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+    </div>
+
+    <!-- =======================================================================
+         VIEW 2: GITHUB DEVELOPER ADVOCATE SUITE (100% PRESERVED)
+         ======================================================================= -->
+    <div id="view-github" class="app-view-container hidden space-y-6">
+      
+      <!-- Profile & Header Banner -->
+      <div class="glass-panel p-6 rounded-2xl border border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div id="ghUserProfileSection">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400">
+              <i class="fab fa-github text-xl"></i>
+            </div>
+            <div>
+              <h3 class="text-sm font-bold text-slate-200">GitHub Developer Advocate AI Agent</h3>
+              <p class="text-xs text-slate-400">Auditing and polishing open source repositories to enterprise standard.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button onclick="window.GitHubModule.init()" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-300 transition flex items-center gap-1.5">
+            <i class="fas fa-sync"></i> Refresh Repos
+          </button>
+        </div>
+      </div>
+
+      <!-- 8-Point Checklist Guide Card -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2 text-center text-xs">
+        <div class="glass-panel p-2.5 rounded-xl border border-slate-800">
+          <div class="font-bold text-cyan-400">1. README</div>
+          <span class="text-[10px] text-slate-500">Badges & SEO</span>
+        </div>
+        <div class="glass-panel p-2.5 rounded-xl border border-slate-800">
+          <div class="font-bold text-cyan-400">2. LICENSE</div>
+          <span class="text-[10px] text-slate-500">MIT Standard</span>
+        </div>
+        <div class="glass-panel p-2.5 rounded-xl border border-slate-800">
+          <div class="font-bold text-cyan-400">3. CONTRIB</div>
+          <span class="text-[10px] text-slate-500">Guidelines</span>
+        </div>
+        <div class="glass-panel p-2.5 rounded-xl border border-slate-800">
+          <div class="font-bold text-cyan-400">4. CONDUCT</div>
+          <span class="text-[10px] text-slate-500">Covenant v2.1</span>
+        </div>
+        <div class="glass-panel p-2.5 rounded-xl border border-slate-800">
+          <div class="font-bold text-cyan-400">5. GITIGNORE</div>
+          <span class="text-[10px] text-slate-500">Stack Specific</span>
+        </div>
+        <div class="glass-panel p-2.5 rounded-xl border border-slate-800">
+          <div class="font-bold text-cyan-400">6. ISSUES</div>
+          <span class="text-[10px] text-slate-500">Bug & Feature</span>
+        </div>
+        <div class="glass-panel p-2.5 rounded-xl border border-slate-800">
+          <div class="font-bold text-cyan-400">7. PR TEMPLATE</div>
+          <span class="text-[10px] text-slate-500">Standardized</span>
+        </div>
+        <div class="glass-panel p-2.5 rounded-xl border border-slate-800">
+          <div class="font-bold text-cyan-400">8. TOPICS</div>
+          <span class="text-[10px] text-slate-500">About & Release</span>
+        </div>
+      </div>
+
+      <!-- Repositories Table -->
+      <div class="glass-panel rounded-2xl border border-slate-800 overflow-hidden">
+        <div class="px-5 py-4 border-b border-slate-800/80 flex items-center justify-between">
+          <h3 class="text-sm font-bold text-slate-200">Public Repositories & 8-Point Compliance Score</h3>
+          <span class="text-xs text-slate-400">Click "Polish Repo" to generate full AI documentation package</span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-slate-950/80 text-slate-400 font-semibold border-b border-slate-800">
+              <tr>
+                <th class="py-3 px-4">Repository</th>
+                <th class="py-3 px-4">Language</th>
+                <th class="py-3 px-4">8-Point Checklist</th>
+                <th class="py-3 px-4">Score</th>
+                <th class="py-3 px-4 text-right">Action</th>
+              </tr>
+            </thead>
+            <tbody id="reposTableBody">
+              <!-- Dynamically rendered -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- =========================================================================
+       MODAL: GITHUB POLISH & APPLY CHANGES (PRESERVED)
+       ========================================================================= -->
+  <div id="ghChangesModal" class="modal-overlay fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
+    <div class="glass-panel w-full max-w-4xl rounded-2xl border border-slate-700 shadow-2xl p-6 space-y-5 max-h-[90vh] flex flex-col">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div>
+          <h3 id="ghModalTitle" class="text-base font-bold text-slate-100">Polish Repository</h3>
+          <p class="text-xs text-slate-400">Review AI-generated documentation, templates, and SEO metadata</p>
+        </div>
+        <button data-close-modal class="text-slate-500 hover:text-slate-200 text-sm p-1.5">
+          <i class="fas fa-xmark"></i>
+        </button>
+      </div>
+
+      <div id="ghModalBody" class="flex-1 overflow-y-auto">
+        <!-- Rendered by window.GitHubModule -->
+      </div>
+
+      <div class="flex items-center justify-end gap-2 pt-3 border-t border-slate-800">
+        <button data-close-modal class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-slate-200">
+          Cancel
+        </button>
+        <button id="ghApplyBtn" class="gradient-btn-cyan px-5 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5">
+          <i class="fas fa-check"></i> Apply & Push to GitHub
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       GLOBAL TOAST NOTIFICATION CONTAINER
+       ========================================================================= -->
+  <div id="toastContainer" class="fixed bottom-6 right-6 z-50 flex flex-col gap-2 max-w-md pointer-events-none"></div>
+
+  <!-- =========================================================================
+       SCRIPTS
+       ========================================================================= -->
+  <script src="/static/js/app.js"></script>
+  <script src="/static/js/socials_view.js"></script>
+  <script src="/static/js/github_view.js"></script>
+</body>
+</html>

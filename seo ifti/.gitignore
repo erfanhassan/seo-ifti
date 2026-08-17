@@ -1,0 +1,23 @@
+# Python environment
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+
+# Environment variables & secrets (CRITICAL)
+.env
+.env.*
+!.env.example
+
+# Database & Local Media
+socials_os.db
+socials_os.db-journal
+media_storage/
+
+# System & IDE files
+.DS_Store
+.vscode/
+.idea/
+*.log
