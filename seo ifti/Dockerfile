@@ -30,8 +30,10 @@ RUN pip install --no-cache-dir --upgrade pip && \
 # Copy application source code
 COPY . .
 
-# Set ownership to non-root user
-RUN chown -R appuser:appgroup $APP_HOME
+# Set ownership and permissions to non-root user
+RUN mkdir -p media_storage && \
+    chown -R appuser:appgroup $APP_HOME && \
+    chmod -R 775 $APP_HOME
 
 # Switch to non-root execution
 USER appuser

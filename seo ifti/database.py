@@ -3,8 +3,11 @@ Database configuration and SQLAlchemy ORM models for Socials OS (Facebook & Twit
 """
 
 import json
+import logging
 from datetime import datetime, timedelta, timezone
 from typing import Any, Dict, List, Optional
+
+logger = logging.getLogger("socials_os.database")
 from sqlalchemy import (
     Boolean,
     Column,
