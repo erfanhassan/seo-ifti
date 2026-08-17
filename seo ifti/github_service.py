@@ -433,6 +433,158 @@ class RepoContext:
     existing_files: List[str] = field(default_factory=list)
 
 
+def generate_enterprise_readme(context: RepoContext, author_name: str = "Erfan Hassan") -> str:
+    """
+    Generates a high-impact, professional tier-1 enterprise README.md
+    with status badges, architecture breakdown, features, quickstart, and licensing.
+    """
+    repo = context.repo_name
+    owner = context.full_name.split("/")[0] if "/" in context.full_name else "erfanhassan"
+    lang = context.language or "TypeScript"
+    desc = context.description or f"Enterprise {repo} application and platform."
+    if desc.endswith('.'):
+        desc = desc[:-1]
+
+    # Detect stack details
+    files_set = set(context.existing_files)
+    is_node = any(f in files_set for f in ["package.json", "tsconfig.json", "next.config.js", "vite.config.ts"]) or lang.lower() in ["typescript", "javascript", "html", "css"]
+    is_python = any(f in files_set for f in ["requirements.txt", "pyproject.toml", "setup.py", "Pipfile"]) or lang.lower() in ["python"]
+
+    # Generate Quickstart instructions
+    if is_node:
+        install_cmd = "npm install"
+        run_cmd = "npm run dev"
+        runtime_env = "Node.js (v18+) & npm / pnpm / yarn"
+    elif is_python:
+        install_cmd = "python3 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt"
+        run_cmd = "python3 main.py"
+        runtime_env = "Python 3.10+"
+    else:
+        install_cmd = "make install"
+        run_cmd = "make run"
+        runtime_env = f"{lang} Runtime"
+
+    return f"""<div align="center">
+
+# 🚀 {repo}
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
+[![GitHub Stars](https://img.shields.io/github/stars/{owner}/{repo}?style=for-the-badge&logo=github)](https://github.com/{owner}/{repo}/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/{owner}/{repo}?style=for-the-badge&logo=github)](https://github.com/{owner}/{repo}/network/members)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge)](CONTRIBUTING.md)
+[![Language](https://img.shields.io/badge/Language-{lang}-informational?style=for-the-badge)](https://github.com/{owner}/{repo})
+
+<p align="center">
+  <strong>{desc} — Built for speed, modularity, and high-converting performance.</strong>
+</p>
+
+[✨ Key Features](#-key-features) • [🛠️ Architecture](#️-tech-stack--architecture) • [📦 Quickstart](#-quickstart--installation) • [📁 Structure](#-project-structure) • [🤝 Contributing](#-contributing) • [📄 License](#-license)
+
+---
+
+</div>
+
+## 🌟 Why This Exists
+
+Modern digital systems and developer workflows demand seamless ergonomics, deterministic stability, and high performance. **{repo}** is engineered from the ground up to eliminate operational friction and deliver a streamlined, production-grade foundation.
+
+Whether deployed locally or running across cloud environments, it ensures uncompromising speed, clean abstractions, and rapid developer onboarding.
+
+---
+
+## ✨ Key Features
+
+- **⚡ High-Throughput & Low Latency**: Optimized execution pipelines designed for maximum responsiveness.
+- **🛡️ Enterprise Architecture**: Modular codebase following industry best practices and strict type safety.
+- **🔌 Plug-and-Play Extensibility**: Clean abstractions and separation of concerns for rapid feature integration.
+- **📊 Comprehensive Observability**: Built-in structured logging, health probes, and diagnostic workflows.
+- **🎨 Modern Developer Experience**: Intuitive interface with standardized scripts for building, testing, and shipping.
+
+---
+
+## 🛠️ Tech Stack & Architecture
+
+| Component | Technology / Framework | Details |
+| :--- | :--- | :--- |
+| **Core Runtime** | `{runtime_env}` | High efficiency execution layer |
+| **Language** | `{lang}` | Type-safe, modern semantics |
+| **Architecture** | Modular Clean Architecture | Decoupled services, routers & handlers |
+| **Packaging** | Standard Manifests | Deterministic dependency lock |
+| **CI / Quality** | Automated Linting & Tests | Production-ready reliability |
+
+---
+
+## 📦 Quickstart & Installation
+
+### 1. Prerequisites
+Ensure you have `{runtime_env}` and `git` installed on your machine.
+
+### 2. Clone the Repository
+```bash
+git clone https://github.com/{owner}/{repo}.git
+cd {repo}
+```
+
+### 3. Install Dependencies
+```bash
+{install_cmd}
+```
+
+### 4. Configure Environment
+Copy the sample environment file and configure your credentials:
+```bash
+cp .env.example .env
+```
+
+### 5. Launch the Application
+```bash
+{run_cmd}
+```
+
+---
+
+## 📁 Project Structure
+
+```text
+{repo}/
+├── .github/                  # GitHub Issue & PR templates, Workflows
+├── src/                      # Core application source code
+├── tests/                    # Unit and integration test suites
+├── .gitignore                # Stack-specific ignore rules
+├── CONTRIBUTING.md           # Community guidelines
+├── CODE_OF_CONDUCT.md        # Contributor Covenant standard
+├── LICENSE                   # Open-source MIT License
+└── README.md                 # Project documentation
+```
+
+---
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome! Feel free to check out the [Issues page](https://github.com/{owner}/{repo}/issues).
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'feat: Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+Please review our [Contributing Guidelines](CONTRIBUTING.md) and [Code of Conduct](CODE_OF_CONDUCT.md) before submitting a PR.
+
+---
+
+## 📄 License
+
+Distributed under the **MIT License**. See [`LICENSE`](LICENSE) for more information.
+
+---
+
+<div align="center">
+  <sub>Built with ❤️ by <a href="https://github.com/{owner}">{author_name}</a> and contributors.</sub>
+</div>
+"""
+
+
 @dataclass
 class PolishBundle:
     """Complete bundle of 8 enterprise artifacts for a repository."""
@@ -556,13 +708,18 @@ class GitHubService:
             except Exception:
                 pass
 
+            is_readme_short = (has_readme and readme_len < 350)
+            is_readme_valid = (has_readme and not is_readme_short)
+
             checklist = self.inspect_repo_polish_checklist(r)
-            checklist["has_readme"] = has_readme
+            checklist["has_readme"] = is_readme_valid
+            checklist["readme_flagged_short"] = is_readme_short
+            checklist["readme_length"] = readme_len
             is_profile = (r.name.lower() == login.lower())
 
-            # Calculate 8-point score
+            # Calculate 8-point score (only full, rich READMEs count toward 8/8)
             score_items = [
-                checklist.get("has_readme", False),
+                is_readme_valid,
                 checklist.get("has_license", False),
                 checklist.get("has_contributing", False),
                 checklist.get("has_code_of_conduct", False),
@@ -585,12 +742,15 @@ class GitHubService:
                 "stars": r.stargazers_count,
                 "forks": r.forks_count,
                 "topics": r.get_topics(),
-                "has_readme": has_readme,
+                "has_readme": is_readme_valid,
                 "readme_length": readme_len,
+                "readme_flagged_short": is_readme_short,
                 "is_profile_repo": is_profile,
                 "checklist": checklist,
                 "status": {
-                    "has_readme": checklist.get("has_readme", False),
+                    "has_readme": is_readme_valid,
+                    "readme_flagged_short": is_readme_short,
+                    "readme_length": readme_len,
                     "has_license": checklist.get("has_license", False),
                     "has_contributing": checklist.get("has_contributing", False),
                     "has_code_of_conduct": checklist.get("has_code_of_conduct", False),

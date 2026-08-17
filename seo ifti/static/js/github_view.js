@@ -106,7 +106,7 @@ window.GitHubModule = (function () {
             <td class="py-3 px-4 text-xs text-slate-400">${safeLang}</td>
             <td class="py-3 px-4">
               <div class="flex items-center gap-1">
-                ${renderStatusBadge('README', status.has_readme)}
+                ${renderReadmeBadge(status)}
                 ${renderStatusBadge('LICENSE', status.has_license)}
                 ${renderStatusBadge('CONTRIB', status.has_contributing)}
                 ${renderStatusBadge('CONDUCT', status.has_code_of_conduct)}
@@ -134,6 +134,16 @@ window.GitHubModule = (function () {
           </td>
         </tr>
       `;
+    }
+  }
+
+  function renderReadmeBadge(status) {
+    if (status.has_readme) {
+      return `<span class="px-1.5 py-0.5 rounded text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30" title="README: Complete (${status.readme_length || 0} chars)">✓</span>`;
+    } else if (status.readme_flagged_short) {
+      return `<span class="px-1.5 py-0.5 rounded text-xs font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30" title="README: Flagged as Short/Stub (${status.readme_length || 0} chars) - Needs Polish">⚠️</span>`;
+    } else {
+      return `<span class="px-1.5 py-0.5 rounded text-xs font-bold bg-slate-800 text-slate-500 border border-slate-700" title="README: Missing">✗</span>`;
     }
   }
 

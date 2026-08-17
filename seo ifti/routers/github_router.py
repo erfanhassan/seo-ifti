@@ -22,6 +22,7 @@ from github_service import (
     generate_bug_report_template,
     generate_code_of_conduct,
     generate_contributing_guide,
+    generate_enterprise_readme,
     generate_feature_request_template,
     generate_gitignore,
     generate_mit_license,
@@ -147,19 +148,26 @@ async def generate_changes(
         )
         ai_data = json.loads(response.choices[0].message.content or "{}")
     except Exception as e:
-        logger.error(f"DeepSeek call failed: {e}")
+        logger.warning(f"DeepSeek call failed ({e}). Generating full deterministic enterprise README...")
+        fallback_topics = [
+            (context.language or "software").lower(),
+            repo.lower().replace("_", "-").replace(" ", "-"),
+            "developer-tools",
+            "open-source",
+            "production",
+        ]
         ai_data = {
-            "readme_content": f"# {repo}\n\nHigh-performance software project.\n\n## Features\n- Scalable architecture\n- Comprehensive documentation\n",
-            "github_topics": ["python", "ai", "fastapi", "automation"],
-            "repo_description": f"Enterprise-grade {repo} system.",
-            "release_notes": "Initial v1.0.0 Production Release.",
+            "readme_content": generate_enterprise_readme(context, owner),
+            "github_topics": fallback_topics,
+            "repo_description": context.description or f"Enterprise {repo} system & platform.",
+            "release_notes": f"## 🚀 {repo} v1.0.0 Production Release\n\nInitial official production release with comprehensive documentation, type-safe architecture, and CI/CD standards.",
         }
 
     changes = []
     # 1. README
     changes.append({
         "path": "README.md",
-        "content": ai_data.get("readme_content", f"# {repo}"),
+        "content": ai_data.get("readme_content") or generate_enterprise_readme(context, owner),
         "description": "Killer README with status badges, architecture, and quickstart",
     })
 
