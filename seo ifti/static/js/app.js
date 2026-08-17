@@ -39,11 +39,9 @@ function switchView(viewName) {
   document.querySelectorAll('[data-view-target]').forEach(btn => {
     const target = btn.getAttribute('data-view-target');
     if (target === viewName) {
-      btn.classList.add('bg-slate-800', 'text-cyan-400', 'border-cyan-500/30');
-      btn.classList.remove('text-slate-400', 'border-transparent');
+      btn.className = 'px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 border bg-slate-800 text-cyan-400 border-cyan-500 shadow-sm';
     } else {
-      btn.classList.remove('bg-slate-800', 'text-cyan-400', 'border-cyan-500/30');
-      btn.classList.add('text-slate-400', 'border-transparent');
+      btn.className = 'px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 border border-transparent text-slate-400 hover:text-slate-200';
     }
   });
 

@@ -37,6 +37,19 @@ window.GitHubModule = (function () {
     }
   }
 
+  function escapeQuotes(str) {
+    return String(str || '').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+  }
+
+  function escapeHtml(str) {
+    return String(str || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
   async function loadRepositories() {
     const tbody = document.getElementById('reposTableBody');
     if (!tbody) return;
@@ -50,7 +63,13 @@ window.GitHubModule = (function () {
     `;
 
     try {
-      const res = await fetch('/api/repos');
+      const res = await fetch('/api/repos', {
+        headers: { 'Accept': 'application/json' },
+        cache: 'no-store'
+      });
+      if (!res.ok) {
+        throw new Error(`Server returned HTTP ${res.status}`);
+      }
       const data = await res.json();
       currentRepos = data.repositories || [];
 
@@ -69,16 +88,22 @@ window.GitHubModule = (function () {
         const status = repo.status || {};
         const score = status.score || 0;
         const color = score >= 7 ? 'text-emerald-400' : score >= 4 ? 'text-amber-400' : 'text-red-400';
+        const safeOwner = encodeURIComponent(repo.owner || 'erfanhassan');
+        const safeName = encodeURIComponent(repo.name || '');
+        const safeDesc = escapeHtml(repo.description || 'No description');
+        const safeDisplayName = escapeHtml(repo.name || '');
+        const safeLang = escapeHtml(repo.language || 'Python');
+        const safeUrl = escapeQuotes(repo.html_url || `https://github.com/${repo.full_name || ''}`);
 
         return `
           <tr class="border-b border-slate-800/60 hover:bg-slate-900/50 transition">
             <td class="py-3 px-4 font-semibold text-slate-200">
-              <a href="${repo.html_url}" target="_blank" class="hover:text-cyan-400 transition flex items-center gap-1.5">
-                <i class="fab fa-github text-slate-400"></i> ${repo.name}
+              <a href="${safeUrl}" target="_blank" class="hover:text-cyan-400 transition flex items-center gap-1.5">
+                <i class="fab fa-github text-slate-400"></i> ${safeDisplayName}
               </a>
-              <span class="text-[11px] text-slate-500 block font-normal">${repo.description || 'No description'}</span>
+              <span class="text-xs text-slate-500 block font-normal mt-0.5">${safeDesc}</span>
             </td>
-            <td class="py-3 px-4 text-xs text-slate-400">${repo.language || 'Python'}</td>
+            <td class="py-3 px-4 text-xs text-slate-400">${safeLang}</td>
             <td class="py-3 px-4">
               <div class="flex items-center gap-1">
                 ${renderStatusBadge('README', status.has_readme)}
@@ -93,8 +118,8 @@ window.GitHubModule = (function () {
             </td>
             <td class="py-3 px-4 text-sm font-bold ${color}">${score} / 8</td>
             <td class="py-3 px-4 text-right">
-              <button onclick="window.GitHubModule.scanRepo('${repo.owner}', '${repo.name}')" class="px-3 py-1.5 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 text-xs font-bold border border-cyan-500/30 transition flex items-center gap-1.5 ml-auto">
-                <i class="fas fa-wand-magic-sparkles text-[10px]"></i> Polish Repo
+              <button onclick="window.GitHubModule.scanRepo(decodeURIComponent('${safeOwner}'), decodeURIComponent('${safeName}'))" class="px-3 py-1.5 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 text-xs font-bold border border-cyan-500/30 transition flex items-center gap-1.5 ml-auto">
+                <i class="fas fa-wand-magic-sparkles"></i> Polish Repo
               </button>
             </td>
           </tr>
@@ -105,7 +130,7 @@ window.GitHubModule = (function () {
       tbody.innerHTML = `
         <tr>
           <td colspan="5" class="text-center py-8 text-red-400">
-            Failed to load repositories: ${err.message}
+            Failed to load repositories: ${escapeHtml(err.message)}
           </td>
         </tr>
       `;
@@ -114,8 +139,8 @@ window.GitHubModule = (function () {
 
   function renderStatusBadge(label, passed) {
     return passed
-      ? `<span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30" title="${label}: Present">✓</span>`
-      : `<span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-slate-800 text-slate-500 border border-slate-700" title="${label}: Missing">✗</span>`;
+      ? `<span class="px-1.5 py-0.5 rounded text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30" title="${label}: Present">✓</span>`
+      : `<span class="px-1.5 py-0.5 rounded text-xs font-bold bg-slate-800 text-slate-500 border border-slate-700" title="${label}: Missing">✗</span>`;
   }
 
   async function scanRepo(owner, repo) {

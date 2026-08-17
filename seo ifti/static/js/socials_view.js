@@ -56,11 +56,9 @@ window.SocialsModule = (function () {
     document.querySelectorAll('[data-socials-tab]').forEach(btn => {
       const target = btn.getAttribute('data-socials-tab');
       if (target === tabName) {
-        btn.classList.add('bg-cyan-500/10', 'text-cyan-400', 'border-cyan-500/40');
-        btn.classList.remove('text-slate-400', 'border-transparent');
+        btn.className = 'w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition border text-left bg-cyan-950/80 text-cyan-400 border-cyan-500/40';
       } else {
-        btn.classList.remove('bg-cyan-500/10', 'text-cyan-400', 'border-cyan-500/40');
-        btn.classList.add('text-slate-400', 'border-transparent');
+        btn.className = 'w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition border border-transparent text-slate-400 hover:text-slate-200 hover:bg-slate-900/60 text-left';
       }
     });
 
