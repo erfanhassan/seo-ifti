@@ -22,13 +22,19 @@ class Settings(BaseSettings):
     # GitHub Service (Preserved)
     github_token: str = Field(default_factory=lambda: os.getenv("GITHUB_TOKEN", ""))
 
-    # DeepSeek AI Reasoning
+    # DeepSeek AI Reasoning & Cost Guardrails
     deepseek_api_key: str = Field(default_factory=lambda: os.getenv("DEEPSEEK_API_KEY", ""))
     deepseek_base_url: str = Field(
         default_factory=lambda: os.getenv("DEEPSEEK_BASE_URL", "https://api.deepseek.com")
     )
     deepseek_model: str = Field(
         default_factory=lambda: os.getenv("DEEPSEEK_MODEL", "deepseek-chat")
+    )
+    daily_ai_request_limit: int = Field(
+        default_factory=lambda: int(os.getenv("DAILY_AI_REQUEST_LIMIT", "100"))
+    )
+    rate_limit_per_minute: int = Field(
+        default_factory=lambda: int(os.getenv("RATE_LIMIT_PER_MINUTE", "15"))
     )
 
     # Database

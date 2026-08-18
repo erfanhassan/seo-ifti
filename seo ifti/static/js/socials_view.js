@@ -12,19 +12,85 @@ window.SocialsModule = (function () {
   let weeklyTopics = [];
 
   const FRESH_TOPICS_POOL = [
-    "The Bootstrapped AI Stack: Scaling medical AI to 1,000 users with lightweight frameworks like Replit & Antigravity vs heavy AWS",
-    "The 'Agentic AI' Shift: Moving past chatbots to autonomous multi-agent execution in 2026 without human supervision",
+    // 1. Startups & Bootstrapping
+    "The Bootstrapped AI Stack: Scaling vertical AI to 1,200 active clinicians with Antigravity & SQLite for under $85/month vs heavy AWS",
+    "The Asset-Light SaaS Playbook: Reaching $20k MRR with a solo engineering stack and zero cloud infrastructure debt",
+    "Why Micro-SaaS Beats Venture Capital in 2026: Single-purpose utilities with 85%+ gross margins",
+    "The $100/mo Infrastructure Rule: How modern solo founders eliminate cloud bloat before product-market fit",
+    
+    // 2. Agentic AI & Autonomous Workflows
+    "The 'Agentic AI' Shift: Moving past chatbots to autonomous multi-agent systems executing complex workflows without human intervention",
+    "Deterministic AI Guardrails: Wrapping probabilistic LLM outputs in strict Pydantic schemas for 99.4% task completion",
+    "Autonomous Task Completion Rate: The #1 metric replacing raw prompt engineering in 2026",
+    "Multi-Agent Orchestration: How a 3-tier scanner, builder, and verifier agent fleet replaces manual developer glue",
+
+    // 3. Zero-Cash Acquisitions & Distribution
     "Zero-Cash Acquisitions: Partnering with existing supply chain operators for instant profitability without cash investment",
+    "Asset-Light M&A for Engineers: Revitalizing legacy offline businesses with custom AI workflow automation",
+    "The Distribution-First Strategy: Why partnering with established customer channels beats burning capital on ad spend",
+
+    // 4. Invisible AI & Operational Depth
     "The 'Invisible AI' Trend: Embedding AI so deeply into business operations that customers never realize they use it",
+    "Silent AI Workflows: Eliminating UI friction by letting background agents audit, format, and synchronize data",
+    "The Ambient Intelligence Model: Why vertical software that requires zero typing is winning enterprise adoption",
+
+    // 5. Emerging Tech Hubs (Bangladesh & Global)
     "The Meta SME AI Academy in Bangladesh: Scaling agriculture & garment sectors globally with practical AI tools",
-    "The Rise of Local AI Engineering: DSi, SELISE, and Devnet shifting from outsourcing to complex GenAI models",
+    "The Rise of Local AI Engineering: DSi, SELISE, and Devnet shifting from software outsourcing to complex GenAI models",
     "The 2026 AI Business Summit: DCCI pushing practical floor AI & digital sovereignty for local SMEs",
-    "The Dual-Persona Architecture: Engineering AI that switches between brutal unfiltered truths and soft empathy",
-    "The Synthetic Influencer Economy: AI creators landing real-world brand deals on TikTok & Facebook",
+    "Emerging Hub Advantage: How South Asian engineering teams are building world-class lean AI systems",
+
+    // 6. Dual-Persona & AI Psychology
+    "The Dual-Persona Architecture: Engineering AI that switches dynamically between brutal unfiltered truths and soft empathy",
+    "Emotional Intelligence in Autonomous Systems: Designing context-aware LLMs that reduce developer burnout",
+    "Radical Candor AI: Why technical founders prefer unvarnished feedback over polite robotic sycophancy",
+
+    // 7. Synthetic Media & Digital Influencers
+    "The Synthetic Influencer Economy: AI creators landing real-world brand sponsorship deals on TikTok & Facebook",
+    "Localized Synthetic Video Pipelines: Automated 30-language video distribution with lip-sync consistency",
+    "The 24/7 Content Engine: How digital creator studios produce 50+ high-converting reels weekly with AI",
+
+    // 8. Human + AI Hybrid Collaboration
     "Human & AI Collaboration: Why the Half-Human + Half-AI model outperforms pure AI in 2026",
+    "Human-in-the-Loop Architecture: Strategic human checkpoints with autonomous agent execution fleets",
+    "The 10x Solo Operator: How one engineer achieves the output of a 15-person department with agentic copilots",
+
+    // 9. Healthcare AI & Vertical Margins
     "Unit Economics of Healthcare AI: Maintaining high margins with autonomous clinical diagnostics & workflows",
-    "AI in Software Development Cycles: Shifting from syntax writing to managing autonomous agents that design and test"
+    "Ambient Clinical Documentation: Reclaiming 15 physician hours weekly by eliminating manual EHR typing",
+    "Vertical Healthcare SaaS: Why domain-specific diagnostic models build defensible competitive moats",
+
+    // 10. Developer Productivity & Autonomous CI/CD
+    "AI in Software Development Cycles: Shifting from syntax writing to managing autonomous agents that design, test, and deploy",
+    "Self-Healing CI/CD Pipelines: Automatically diagnosing build failures and drafting PR patches before code review",
+    "The Architecture-First Engineer: Why schema validation and security boundaries are the highest-leverage skills in 2026",
+    "Eliminating Technical Debt with Deterministic State: Why SQLite and local NVMe caching outperform heavy microservices",
+    "Open Source Growth Engineering: Transforming GitHub repositories into high-converting developer storefronts"
   ];
+
+  // Non-repeating randomized topic queues per platform
+  const topicQueues = {
+    facebook: [],
+    twitter: [],
+    linkedin: [],
+  };
+
+  function shuffleArray(arr) {
+    const copy = [...arr];
+    for (let i = copy.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+    return copy;
+  }
+
+  function getNextFreshTopic(platform) {
+    const key = platform.toLowerCase();
+    if (!topicQueues[key] || topicQueues[key].length === 0) {
+      topicQueues[key] = shuffleArray(FRESH_TOPICS_POOL);
+    }
+    return topicQueues[key].pop();
+  }
 
   function init() {
     setupSidebarTabs();
@@ -377,24 +443,25 @@ window.SocialsModule = (function () {
         feedRefreshBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Refreshing...';
 
         try {
-          const randomTopic = FRESH_TOPICS_POOL[Math.floor(Math.random() * FRESH_TOPICS_POOL.length)];
+          const nextTopic = getNextFreshTopic('facebook');
+          const cleanTopicTitle = nextTopic.split(':')[0].trim();
           const res = await fetch('/api/socials/generate', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ platform: 'facebook', topic: randomTopic }),
+            body: JSON.stringify({ platform: 'facebook', topic: nextTopic }),
           });
           const data = await res.json();
 
           if (data.success && feedContentEditor) {
             feedContentEditor.value = data.content;
-            if (feedTopicLabel) feedTopicLabel.textContent = randomTopic;
+            if (feedTopicLabel) feedTopicLabel.textContent = cleanTopicTitle;
             if (feedStatusBadge) {
               feedStatusBadge.className = 'text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border bg-cyan-500/20 text-cyan-300 border-cyan-500/30';
               feedStatusBadge.textContent = 'READY TO PUBLISH';
             }
             const words = data.content.trim().split(/\s+/).filter(Boolean).length;
             if (feedWordCountBadge) feedWordCountBadge.textContent = `${words} words`;
-            window.showToast('Feed refreshed with new Facebook post! You can edit it directly.', 'success');
+            window.showToast(`Feed refreshed with new topic: "${cleanTopicTitle}"`, 'success');
           } else {
             window.showToast('Failed to refresh feed post', 'error');
           }
@@ -727,24 +794,25 @@ window.SocialsModule = (function () {
         feedRefreshBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Refreshing...';
 
         try {
-          const randomTopic = FRESH_TOPICS_POOL[Math.floor(Math.random() * FRESH_TOPICS_POOL.length)];
+          const nextTopic = getNextFreshTopic('twitter');
+          const cleanTopicTitle = nextTopic.split(':')[0].trim();
           const res = await fetch('/api/socials/generate', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ platform: 'twitter', topic: randomTopic }),
+            body: JSON.stringify({ platform: 'twitter', topic: nextTopic }),
           });
           const data = await res.json();
 
           if (data.success && feedContentEditor) {
             feedContentEditor.value = data.tweet;
-            if (feedTopicLabel) feedTopicLabel.textContent = randomTopic;
+            if (feedTopicLabel) feedTopicLabel.textContent = cleanTopicTitle;
             if (feedStatusBadge) {
               feedStatusBadge.className = 'text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border bg-cyan-500/20 text-cyan-300 border-cyan-500/30';
               feedStatusBadge.textContent = 'READY TO POST';
             }
             const len = data.tweet.length;
             if (feedCharBadge) feedCharBadge.textContent = `${len} / 280`;
-            window.showToast('Feed refreshed with new tweet! You can edit it directly.', 'success');
+            window.showToast(`Feed refreshed with new topic: "${cleanTopicTitle}"`, 'success');
           } else {
             window.showToast('Failed to refresh tweet', 'error');
           }
@@ -1019,24 +1087,25 @@ window.SocialsModule = (function () {
         feedRefreshBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Refreshing...';
 
         try {
-          const randomTopic = FRESH_TOPICS_POOL[Math.floor(Math.random() * FRESH_TOPICS_POOL.length)];
+          const nextTopic = getNextFreshTopic('linkedin');
+          const cleanTopicTitle = nextTopic.split(':')[0].trim();
           const res = await fetch('/api/socials/generate', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ platform: 'linkedin', topic: randomTopic }),
+            body: JSON.stringify({ platform: 'linkedin', topic: nextTopic }),
           });
           const data = await res.json();
 
           if (data.success && feedContentEditor) {
             feedContentEditor.value = data.content;
-            if (feedTopicLabel) feedTopicLabel.textContent = randomTopic;
+            if (feedTopicLabel) feedTopicLabel.textContent = cleanTopicTitle;
             if (feedStatusBadge) {
               feedStatusBadge.className = 'text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border bg-cyan-500/20 text-cyan-300 border-cyan-500/30';
               feedStatusBadge.textContent = 'READY TO PUBLISH';
             }
             const words = data.content.trim().split(/\s+/).filter(Boolean).length;
             if (feedWordCountBadge) feedWordCountBadge.textContent = `${words} words`;
-            window.showToast('Feed refreshed with new LinkedIn post! You can edit it directly.', 'success');
+            window.showToast(`Feed refreshed with new topic: "${cleanTopicTitle}"`, 'success');
           } else {
             window.showToast('Failed to refresh LinkedIn post', 'error');
           }

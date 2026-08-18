@@ -168,7 +168,11 @@ window.GitHubModule = (function () {
     `;
 
     try {
-      const res = await fetch(`/api/changes?owner=${owner}&repo=${repo}`);
+      const res = await fetch('/api/changes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ owner, repo }),
+      });
       const data = await res.json();
       pendingChanges = data;
       renderChangesModalContent(data);

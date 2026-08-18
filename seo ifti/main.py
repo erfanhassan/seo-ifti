@@ -9,6 +9,7 @@ import os
 import sys
 from contextlib import asynccontextmanager
 from datetime import datetime, timezone
+from typing import Dict, List, Optional
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
@@ -112,12 +113,62 @@ async def lifespan(app: FastAPI):
         logger.info("Background scheduler shut down.")
 
 
+# -----------------------------------------------------------------------------
+# Rate Limiting & Protection Middleware
+# -----------------------------------------------------------------------------
+import time
+from collections import defaultdict
+from fastapi.responses import JSONResponse
+
+_ip_request_history: Dict[str, List[float]] = defaultdict(list)
+
+def _is_rate_limited(ip: str, max_requests: int = 30, window_seconds: int = 60) -> bool:
+    """Sliding-window IP rate limiter to protect backend from crawlers/scrapers."""
+    now = time.time()
+    history = _ip_request_history[ip]
+    # Prune old requests outside the window
+    _ip_request_history[ip] = [t for t in history if now - t < window_seconds]
+    if len(_ip_request_history[ip]) >= max_requests:
+        return True
+    _ip_request_history[ip].append(now)
+    return False
+
+
+is_production = settings.environment.lower() == "production"
+
 app = FastAPI(
     title="Growth OS & Socials OS",
     description="Unified Socials OS (Facebook & Twitter Management) and GitHub Developer Advocate Suite",
     version="2.0.0",
     lifespan=lifespan,
+    docs_url=None if is_production else "/docs",
+    redoc_url=None if is_production else "/redoc",
+    openapi_url=None if is_production else "/openapi.json",
 )
+
+# Global Rate Limiting Middleware
+@app.middleware("http")
+async def rate_limit_middleware(request: Request, call_next):
+    client_ip = request.client.host if request.client else "unknown"
+    path = request.url.path
+
+    # Protect AI and generation endpoints with strict rate limiting
+    if path.startswith("/api/socials/generate") or path.startswith("/api/changes") or path.startswith("/api/socials/daily-package"):
+        if _is_rate_limited(f"{client_ip}:ai", max_requests=settings.rate_limit_per_minute, window_seconds=60):
+            logger.warning(f"Rate limit exceeded for IP {client_ip} on {path}")
+            return JSONResponse(
+                status_code=429,
+                content={"success": False, "error": "Rate limit exceeded. Please wait a moment before generating again."},
+            )
+    elif path.startswith("/api/"):
+        if _is_rate_limited(f"{client_ip}:general", max_requests=60, window_seconds=60):
+            return JSONResponse(
+                status_code=429,
+                content={"success": False, "error": "Too many requests. Please slow down."},
+            )
+
+    response = await call_next(request)
+    return response
 
 # CORS
 app.add_middleware(

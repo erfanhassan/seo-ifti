@@ -115,18 +115,41 @@ def list_repositories(gh: GitHubService = Depends(get_github_service)):
     return gh.list_repositories_with_status()
 
 
-@router.get("/api/changes", summary="Generate Changes and Proposed Plan for a Repo")
+class GenerateChangesRequest(BaseModel):
+    owner: str
+    repo: str
+
+
+# In-memory LRU cache for repo analysis results (avoids repeated API calls)
+_repo_changes_cache: Dict[str, Dict[str, Any]] = {}
+
+
+@router.post("/api/changes", summary="Generate Changes and Proposed Plan for a Repo")
+@router.get("/api/changes", summary="Generate Changes and Proposed Plan for a Repo (Compatibility)")
 async def generate_changes(
-    owner: str,
-    repo: str,
+    request: Request,
+    payload: Optional[GenerateChangesRequest] = None,
+    owner: Optional[str] = None,
+    repo: Optional[str] = None,
     gh: GitHubService = Depends(get_github_service),
 ):
-    context = gh.scan_repository_context(owner, repo)
+    target_owner = (payload.owner if payload else None) or owner
+    target_repo = (payload.repo if payload else None) or repo
+
+    if not target_owner or not target_repo:
+        raise HTTPException(status_code=400, detail="Missing owner or repo parameter")
+
+    cache_key = f"{target_owner.lower()}/{target_repo.lower()}"
+    if cache_key in _repo_changes_cache:
+        logger.info(f"Returning cached changes analysis for {cache_key} (Saved AI Credits!)")
+        return _repo_changes_cache[cache_key]
+
+    context = gh.scan_repository_context(target_owner, target_repo)
 
     # Call DeepSeek for README, topics, description, release notes
     client = get_deepseek_client()
     user_prompt = (
-        f"Repository: {owner}/{repo}\n"
+        f"Repository: {target_owner}/{target_repo}\n"
         f"Primary Language: {context.language or 'Generic'}\n"
         f"Current Description: {context.description or 'None'}\n"
         f"Existing Files: {', '.join(context.existing_files[:50])}\n\n"
@@ -151,16 +174,16 @@ async def generate_changes(
         logger.warning(f"DeepSeek call failed ({e}). Generating full deterministic enterprise README...")
         fallback_topics = [
             (context.language or "software").lower(),
-            repo.lower().replace("_", "-").replace(" ", "-"),
+            target_repo.lower().replace("_", "-").replace(" ", "-"),
             "developer-tools",
             "open-source",
             "production",
         ]
         ai_data = {
-            "readme_content": generate_enterprise_readme(context, owner),
+            "readme_content": generate_enterprise_readme(context, target_owner),
             "github_topics": fallback_topics,
-            "repo_description": context.description or f"Enterprise {repo} system & platform.",
-            "release_notes": f"## 🚀 {repo} v1.0.0 Production Release\n\nInitial official production release with comprehensive documentation, type-safe architecture, and CI/CD standards.",
+            "repo_description": context.description or f"Enterprise {target_repo} system & platform.",
+            "release_notes": f"## 🚀 {target_repo} v1.0.0 Production Release\n\nInitial official production release with comprehensive documentation, type-safe architecture, and CI/CD standards.",
         }
 
     changes = []
@@ -224,13 +247,15 @@ async def generate_changes(
             "description": "Standard Pull Request template",
         })
 
-    return {
-        "repo": f"{owner}/{repo}",
+    result = {
+        "repo": f"{target_owner}/{target_repo}",
         "changes": changes,
         "topics": ai_data.get("github_topics", []),
         "description": ai_data.get("repo_description", ""),
         "release_notes": ai_data.get("release_notes", ""),
     }
+    _repo_changes_cache[cache_key] = result
+    return result
 
 
 @router.post("/api/apply", summary="Apply Proposed Changes & Synchronize Repository")
